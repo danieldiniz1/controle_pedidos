@@ -1,10 +1,8 @@
 package br.com.controle.pedidos.service.impl;
 
-import br.com.controle.pedidos.exception.CategoriaNotFoundException;
-import br.com.controle.pedidos.model.Categoria;
+import br.com.controle.pedidos.exception.ObjetoNotFoundException;
 import br.com.controle.pedidos.model.Produto;
 import br.com.controle.pedidos.repository.ProdutoRepository;
-import br.com.controle.pedidos.service.CategoriaService;
 import br.com.controle.pedidos.service.ProdutoService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -23,7 +21,7 @@ public class DefaultProdutoService implements ProdutoService {
 
     @Override
     public Produto buscarPorId(Long id) {
-        return produtoRepository.findById(id).orElseThrow(() -> new CategoriaNotFoundException("" +
+        return produtoRepository.findById(id).orElseThrow(() -> new ObjetoNotFoundException("" +
                 "Não foi encontrado produto com o id " + id));
     }
 

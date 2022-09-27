@@ -1,9 +1,8 @@
 package br.com.controle.pedidos.service.impl;
 
 import br.com.controle.pedidos.controller.dto.CategoriaResponseDTO;
-import br.com.controle.pedidos.exception.CategoriaNotFoundException;
+import br.com.controle.pedidos.exception.ObjetoNotFoundException;
 import br.com.controle.pedidos.model.Categoria;
-import br.com.controle.pedidos.model.Produto;
 import br.com.controle.pedidos.populator.Populator;
 import br.com.controle.pedidos.repository.CategoriaRepository;
 import br.com.controle.pedidos.service.CategoriaService;
@@ -26,7 +25,7 @@ public class DefaultCategoriaService implements CategoriaService {
 
     @Override
     public CategoriaResponseDTO buscarPorId(Long id) {
-        Categoria categoria = categoriaRepository.findById(id).orElseThrow(() -> new CategoriaNotFoundException("" +
+        Categoria categoria = categoriaRepository.findById(id).orElseThrow(() -> new ObjetoNotFoundException("" +
                 "Não foi encontrado uma categoria com o id " + id.toString()));
         return converterCategoriaDTO(categoria, new CategoriaResponseDTO());
     }

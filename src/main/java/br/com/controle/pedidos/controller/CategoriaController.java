@@ -27,12 +27,14 @@ public class CategoriaController {
     private CategoriaService categoriaService;
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity testar(@PathVariable Long id){
-        try {
-            return ResponseEntity.status(200).body(categoriaService.buscarPorId(id));
-        } catch (Exception e){
-            LOGGER.error("erro: " + e.getMessage());
-            return ResponseEntity.badRequest().build();
-        }
+    public ResponseEntity buscarCategoriaPorId(@PathVariable Long id){
+
+        return ResponseEntity.status(200).body(categoriaService.buscarPorId(id));
+//        try {
+//            return ResponseEntity.status(200).body(categoriaService.buscarPorId(id));
+//        } catch (Exception e){
+//            LOGGER.error("erro: " + e.getMessage());
+//            return ResponseEntity.badRequest().build();
+//        }
     }
 }
