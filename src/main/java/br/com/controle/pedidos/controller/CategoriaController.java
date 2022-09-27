@@ -1,5 +1,6 @@
 package br.com.controle.pedidos.controller;
 
+import br.com.controle.pedidos.controller.dto.CategoriaResponseDTO;
 import br.com.controle.pedidos.model.Categoria;
 import br.com.controle.pedidos.service.CategoriaService;
 import org.apache.logging.log4j.LogManager;
@@ -27,10 +28,6 @@ public class CategoriaController {
 
     @GetMapping(value = "/{id}")
     public ResponseEntity testar(@PathVariable Long id){
-//        Categoria informatica = Categoria.valueOf(1L, "Informática");
-//        LOGGER.info("hashcode informatica: " + informatica.hashCode());
-//        Categoria escritorio = Categoria.valueOf(2L, "Escritório");
-//        LOGGER.info("hashcode categoria: " + informatica.hashCode());
         try {
             return ResponseEntity.status(200).body(categoriaService.buscarPorId(id));
         } catch (Exception e){
