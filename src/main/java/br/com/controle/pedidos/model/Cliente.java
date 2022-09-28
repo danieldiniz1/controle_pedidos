@@ -1,6 +1,7 @@
 package br.com.controle.pedidos.model;
 
 import br.com.controle.pedidos.model.enums.TipoCliente;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.springframework.util.Assert;
 
 import javax.persistence.*;
@@ -18,6 +19,7 @@ public class Cliente {
     private String cnpj;
     private Integer tipoCliente;
     @OneToMany(mappedBy = "cliente")
+    @JsonManagedReference
     private List<Endereco> enderecos = new ArrayList<>();
     @ElementCollection
     @CollectionTable(name = "Telefone")

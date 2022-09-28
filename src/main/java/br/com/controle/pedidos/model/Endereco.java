@@ -1,5 +1,7 @@
 package br.com.controle.pedidos.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.util.Assert;
 
 import javax.persistence.*;
@@ -18,9 +20,11 @@ public class Endereco {
     private String cep;
     @ManyToOne
     @JoinColumn(name = "cliente_id")
+    @JsonBackReference
     private Cliente cliente;
     @ManyToOne
     @JoinColumn(name = "cidade_id")
+//    @JsonBackReference
     private Cidade cidade;
 
     public Endereco() {

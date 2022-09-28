@@ -1,5 +1,6 @@
 package br.com.controle.pedidos.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import org.springframework.util.Assert;
 
 import javax.persistence.*;
@@ -15,6 +16,7 @@ public class Estado {
     private Long id;
     private String nome;
     @OneToMany(mappedBy = "estado")
+    @JsonBackReference
     private List<Cidade> cidades = new ArrayList<>();
 
     public Estado() {

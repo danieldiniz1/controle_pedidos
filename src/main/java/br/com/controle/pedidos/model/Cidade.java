@@ -1,5 +1,6 @@
 package br.com.controle.pedidos.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.springframework.util.Assert;
 
 import javax.persistence.*;
@@ -14,6 +15,7 @@ public class Cidade {
     private String nome;
     @ManyToOne
     @JoinColumn(name = "estado_id")
+    @JsonManagedReference
     private Estado estado;
 
     public Cidade() {
