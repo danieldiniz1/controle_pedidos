@@ -2,9 +2,9 @@ package br.com.controle.pedidos.model.enums;
 
 public enum EstadoPagamento {
 
-    PENDENTE(0,"Pagamento encontra-se Pendente"),
-    QUITADO(1,"Pagamento encontra-se Quitado"),
-    CANCELADO(2,"Pedido foi cancelado");
+    PENDENTE(1,"Pagamento encontra-se Pendente"),
+    QUITADO(2,"Pagamento encontra-se Quitado"),
+    CANCELADO(3,"Pedido foi cancelado");
 
     private Integer codigo;
     private String descricao;

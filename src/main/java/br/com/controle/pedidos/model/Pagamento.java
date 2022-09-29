@@ -11,8 +11,7 @@ public abstract class Pagamento {
 
     @Id
     private Long id;
-    private EstadoPagamento estadoPagamento;
-
+    private Integer estadoPagamento;
     @OneToOne
     @JoinColumn(name = "pedido_id")
     @MapsId
@@ -22,7 +21,7 @@ public abstract class Pagamento {
     }
 
     public Pagamento(EstadoPagamento estadoPagamento, Pedido pedido) {
-        this.estadoPagamento = estadoPagamento;
+        this.estadoPagamento = estadoPagamento.getCodigo();
         this.pedido = pedido;
     }
 
@@ -35,11 +34,11 @@ public abstract class Pagamento {
     }
 
     public EstadoPagamento getEstadoPagamento() {
-        return estadoPagamento;
+        return EstadoPagamento.toEnum(estadoPagamento);
     }
 
     public void setEstadoPagamento(EstadoPagamento estadoPagamento) {
-        this.estadoPagamento = estadoPagamento;
+        this.estadoPagamento = estadoPagamento.getCodigo();
     }
 
     public Pedido getPedido() {
