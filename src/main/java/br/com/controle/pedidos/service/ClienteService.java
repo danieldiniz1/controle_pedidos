@@ -11,4 +11,6 @@ public interface ClienteService {
     void cadastrarClientes(List<Cliente> clientes);
 
     ClienteResponseDTO buscarClientePorId(Long id);
+
+    void atualizarCliente(Cliente cliente);
 }

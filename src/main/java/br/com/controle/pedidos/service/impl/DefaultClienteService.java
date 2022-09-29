@@ -41,6 +41,11 @@ public class DefaultClienteService implements ClienteService {
         return converterToClienteResponseDTO(cliente,new ClienteResponseDTO());
     }
 
+    @Override
+    public void atualizarCliente(Cliente cliente) {
+        clienteRepository.save(cliente);
+    }
+
     private ClienteResponseDTO converterToClienteResponseDTO(Cliente cliente, ClienteResponseDTO clienteResponseDTO) {
         clienteResponsePopulator.populate(cliente,clienteResponseDTO);
         return clienteResponseDTO;

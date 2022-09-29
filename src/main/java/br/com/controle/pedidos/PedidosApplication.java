@@ -1,6 +1,7 @@
 package br.com.controle.pedidos;
 
 import br.com.controle.pedidos.model.*;
+import br.com.controle.pedidos.model.enums.EstadoPagamento;
 import br.com.controle.pedidos.model.enums.TipoCliente;
 import br.com.controle.pedidos.service.*;
 import org.apache.logging.log4j.LogManager;
@@ -11,6 +12,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.Month;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -35,6 +39,13 @@ public class PedidosApplication implements CommandLineRunner {
 
 	@Autowired
 	private EnderecoService enderecoService;
+
+	@Autowired
+	private PedidoService pedidoService;
+
+	@Autowired
+	private PagamentoService pagamentoService;
+
 
 	public static void main(String[] args) {
 		SpringApplication.run(PedidosApplication.class, args);
@@ -93,6 +104,31 @@ public class PedidosApplication implements CommandLineRunner {
 		clienteService.cadastrarCliente(maria);
 		clienteService.cadastrarClientes(Arrays.asList(jose,mariaempresa));
 		enderecoService.cadastrarEnderecos(Arrays.asList(endereco_uberlandia,endereco_sp,endereco_campinas));
+
+		SimpleDateFormat sfd = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+
+		Pedido pedidoPrimeiro = Pedido.valueOf(
+				LocalDateTime.of(2017, Month.SEPTEMBER, 30, 10, 32),
+				null, maria, endereco_uberlandia);
+
+		Pedido pedidoSegundo = Pedido.valueOf(
+				LocalDateTime.of(2017, Month.SEPTEMBER, 30, 10, 32),
+				null, maria, endereco_sp);
+
+		Pagamento pagamentoCartao = PagamentoComCartao.valueOf(EstadoPagamento.PENDENTE,pedidoPrimeiro,6);
+		pedidoPrimeiro.setPagamento(pagamentoCartao);
+
+		PagamentoComBoleto pagamentoComBoleto = PagamentoComBoleto.valueOf(EstadoPagamento.PENDENTE, pedidoSegundo,
+				LocalDateTime.of(2017, Month.OCTOBER, 20, 23, 59),
+				null);
+		pedidoSegundo.setPagamento(pagamentoComBoleto);
+
+		maria.setPedidos(Arrays.asList(pedidoPrimeiro,pedidoSegundo));
+
+		pedidoService.salvarPedidos(Arrays.asList(pedidoPrimeiro,pedidoSegundo));
+		pagamentoService.salvarPagamentos(Arrays.asList(pagamentoCartao,pagamentoComBoleto));
+		clienteService.atualizarCliente(maria);
+
 
 	}
 }
