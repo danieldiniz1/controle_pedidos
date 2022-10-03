@@ -12,6 +12,6 @@ public class CategoriaResponsePopulator implements Populator<Categoria, Categori
     @Override
     public void populate(Categoria source, CategoriaResponseDTO target) {
         target.setNome(source.getNome());
-        target.setProdutos(source.getProdutos() == null ? Collections.emptyList() : source.getProdutos());
+//        target.setProdutos(source.getProdutos() == null ? Collections.emptyList() : source.getProdutos());
     }
 }

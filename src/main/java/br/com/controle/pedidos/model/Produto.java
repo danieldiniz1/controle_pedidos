@@ -24,6 +24,7 @@ public class Produto {
     private List<Categoria> categorias = new ArrayList<>();
 
     @OneToMany(mappedBy = "id.produto")
+    @JsonIgnore
     private Set<ItemPedido> itens = new HashSet<>();
 
     public Produto() {
