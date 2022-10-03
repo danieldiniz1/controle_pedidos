@@ -14,4 +14,6 @@ public interface CategoriaService {
     void salvarListaCategorias(List<Categoria> categorias);
 
     Categoria salvarCategoria(CategoriaForm categoriaForm);
+
+    void atualizarCategoria(CategoriaForm categoriaForm, Long id);
 }

@@ -10,7 +10,7 @@ import org.springframework.util.Assert;
 public class CategoriaReversePopulator implements Populator<CategoriaForm, Categoria> {
     @Override
     public void populate(CategoriaForm source, Categoria target) {
-        target.setId(null);
+        target.setId(source.getId());
         target.setNome(source.getNome());
 
     }

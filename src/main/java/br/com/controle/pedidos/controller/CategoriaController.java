@@ -41,4 +41,10 @@ public class CategoriaController {
                 .toUri();
         return ResponseEntity.created(uri).build();
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity atualizarCategoria(@RequestBody @Valid CategoriaForm categoriaForm,@PathVariable Long id){
+        categoriaService.atualizarCategoria(categoriaForm,id);
+        return ResponseEntity.noContent().build();
+    }
 }

@@ -43,9 +43,19 @@ public class DefaultCategoriaService implements CategoriaService {
     @Override
     public Categoria salvarCategoria(CategoriaForm categoriaForm) {
         Categoria categoria = Categoria.categoriaBlank();
+        categoriaForm.setId(null);
         converterCategoria(categoriaForm, categoria);
         return categoriaRepository.save(categoria);
 
+    }
+
+    @Override
+    public void atualizarCategoria(CategoriaForm categoriaForm, Long id) {
+        Categoria categoria = categoriaRepository.findById(id).orElseThrow(() -> new ObjetoNotFoundException("" +
+                "Não foi encontrado uma categoria com o id " + id.toString()));
+        categoriaForm.setId(id);
+        converterCategoria(categoriaForm,categoria);
+        categoriaRepository.save(categoria);
     }
 
     private void converterCategoria(CategoriaForm categoriaForm, Categoria categoria) {

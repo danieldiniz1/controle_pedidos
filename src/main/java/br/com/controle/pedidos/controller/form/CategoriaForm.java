@@ -3,12 +3,11 @@ package br.com.controle.pedidos.controller.form;
 
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import java.util.List;
 
 public class CategoriaForm {
 
-//    @NotNull(message = "O Nome da Categoria não pode ser nulo")
+    public Long id;
+    //    @NotNull(message = "O Nome da Categoria não pode ser nulo")
     @NotBlank(message = "O Nome da Categoria não pode ser em branco ou vazio")
     private String nome;
 
@@ -24,5 +23,11 @@ public class CategoriaForm {
         this.nome = nome;
     }
 
+    public Long getId() {
+        return id;
+    }
 
+    public void setId(Long getId) {
+        this.id = getId;
+    }
 }
