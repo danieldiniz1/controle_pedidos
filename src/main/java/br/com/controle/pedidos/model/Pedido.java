@@ -1,5 +1,6 @@
 package br.com.controle.pedidos.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.springframework.util.Assert;
 
 import javax.persistence.*;
@@ -17,10 +18,12 @@ public class Pedido {
     private Long id;
     private LocalDateTime instante;
 
+    @JsonManagedReference
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "pedido")
     private Pagamento pagamento;
     @ManyToOne
     @JoinColumn(name = "cliente_id")
+    @JsonManagedReference
     private Cliente cliente;
     @ManyToOne
     @JoinColumn(name = "endereco_de_entrega_id")

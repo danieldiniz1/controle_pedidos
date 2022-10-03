@@ -1,6 +1,7 @@
 package br.com.controle.pedidos.model;
 
 import br.com.controle.pedidos.model.enums.EstadoPagamento;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
 import java.util.Objects;
@@ -12,6 +13,7 @@ public abstract class Pagamento {
     @Id
     private Long id;
     private Integer estadoPagamento;
+    @JsonBackReference
     @OneToOne
     @JoinColumn(name = "pedido_id")
     @MapsId

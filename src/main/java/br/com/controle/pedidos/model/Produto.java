@@ -23,8 +23,8 @@ public class Produto {
     @JsonIgnore
     private List<Categoria> categorias = new ArrayList<>();
 
-    @OneToMany(mappedBy = "id.produto")
     @JsonIgnore
+    @OneToMany(mappedBy = "id.produto")
     private Set<ItemPedido> itens = new HashSet<>();
 
     public Produto() {
@@ -35,6 +35,7 @@ public class Produto {
         this.preco = preco;
     }
 
+    @JsonIgnore
     public List<Pedido> getPedidos(){
         List<Pedido> listaPedidos = new ArrayList<>();
         itens.stream().collect(Collectors.toList()).forEach((itemPedido -> listaPedidos.add(itemPedido.getPedido())));

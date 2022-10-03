@@ -7,7 +7,7 @@ import java.util.List;
 public class CategoriaResponseDTO {
 
     private String nome;
-//    private List<Produto> produtos;
+    private List<Produto> produtos;
 
     public CategoriaResponseDTO() {
     }
@@ -20,11 +20,11 @@ public class CategoriaResponseDTO {
         this.nome = nome;
     }
 
-//    public List<Produto> getProdutos() {
-//        return produtos;
-//    }
-//
-//    public void setProdutos(List<Produto> produtos) {
-//        this.produtos = produtos;
-//    }
+    public List<Produto> getProdutos() {
+        return produtos;
+    }
+
+    public void setProdutos(List<Produto> produtos) {
+        this.produtos = produtos;
+    }
 }

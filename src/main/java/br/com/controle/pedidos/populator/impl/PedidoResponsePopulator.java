@@ -11,5 +11,9 @@ public class PedidoResponsePopulator implements Populator<Pedido, PedidoResponse
     public void populate(Pedido source, PedidoResponseDTO target) {
         target.setId(source.getId().toString());
         target.setDataPedido(source.getInstante().toString());
+        target.setCliente(source.getCliente());
+        target.setEnderecoDeEntrega(source.getEnderecoDeEntrega());
+        target.setPagamento(source.getPagamento());
+        target.setItemPedido(source.getItens());
     }
 }

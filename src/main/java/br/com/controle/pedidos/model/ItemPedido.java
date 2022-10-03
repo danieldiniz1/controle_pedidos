@@ -15,6 +15,7 @@ public class ItemPedido {
 
     private static final Logger LOGGER = LogManager.getLogger();
 
+    @JsonIgnore
     @EmbeddedId
     private ItemPedidoPK id = new ItemPedidoPK();
     private BigDecimal desconto;
@@ -32,10 +33,12 @@ public class ItemPedido {
         this.preco = preco;
     }
 
+    @JsonIgnore
     public Pedido getPedido(){
         return id.getPedido();
     }
 
+    @JsonIgnore
     public Produto getProduto(){
         return id.getProduto();
     }
