@@ -1,6 +1,7 @@
 package br.com.controle.pedidos.service;
 
 import br.com.controle.pedidos.controller.dto.CategoriaResponseDTO;
+import br.com.controle.pedidos.controller.form.CategoriaForm;
 import br.com.controle.pedidos.model.Categoria;
 import br.com.controle.pedidos.model.Produto;
 
@@ -12,4 +13,5 @@ public interface CategoriaService {
 
     void salvarListaCategorias(List<Categoria> categorias);
 
+    Categoria salvarCategoria(CategoriaForm categoriaForm);
 }
