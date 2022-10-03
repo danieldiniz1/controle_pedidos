@@ -1,6 +1,7 @@
 package br.com.controle.pedidos.controller;
 
 import br.com.controle.pedidos.controller.dto.CategoriaResponseDTO;
+import br.com.controle.pedidos.controller.dto.ListaCategoriasDTO;
 import br.com.controle.pedidos.controller.form.CategoriaForm;
 import br.com.controle.pedidos.model.Categoria;
 import br.com.controle.pedidos.service.CategoriaService;
@@ -27,9 +28,13 @@ public class CategoriaController {
     @Autowired
     private CategoriaService categoriaService;
 
-    @GetMapping(value = "/{id}")
-    public ResponseEntity buscarCategoriaPorId(@PathVariable Long id){
+    @GetMapping()
+    public ResponseEntity<ListaCategoriasDTO> buscarTodasCategorias(){
+        return ResponseEntity.status(200).body(categoriaService.buscarTodasCategorias());
+    }
 
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<CategoriaResponseDTO> buscarCategoriaPorId(@PathVariable Long id){
         return ResponseEntity.status(200).body(categoriaService.buscarPorId(id));
     }
 
@@ -45,6 +50,12 @@ public class CategoriaController {
     @PutMapping("/{id}")
     public ResponseEntity atualizarCategoria(@RequestBody @Valid CategoriaForm categoriaForm,@PathVariable Long id){
         categoriaService.atualizarCategoria(categoriaForm,id);
+        return ResponseEntity.noContent().build();
+    }
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity deletarCategoriaPorId(@PathVariable Long id){
+        categoriaService.deletarCategoria(id);
         return ResponseEntity.noContent().build();
     }
 }

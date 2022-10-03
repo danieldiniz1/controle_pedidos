@@ -1,7 +1,9 @@
 package br.com.controle.pedidos.service.impl;
 
 import br.com.controle.pedidos.controller.dto.CategoriaResponseDTO;
+import br.com.controle.pedidos.controller.dto.ListaCategoriasDTO;
 import br.com.controle.pedidos.controller.form.CategoriaForm;
+import br.com.controle.pedidos.exception.DataIntegrityException;
 import br.com.controle.pedidos.exception.ObjetoNotFoundException;
 import br.com.controle.pedidos.model.Categoria;
 import br.com.controle.pedidos.populator.Populator;
@@ -10,6 +12,7 @@ import br.com.controle.pedidos.service.CategoriaService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -56,6 +59,20 @@ public class DefaultCategoriaService implements CategoriaService {
         categoriaForm.setId(id);
         converterCategoria(categoriaForm,categoria);
         categoriaRepository.save(categoria);
+    }
+
+    @Override
+    public void deletarCategoria(Long id) {
+        try {
+            categoriaRepository.deleteById(id);
+        } catch (EmptyResultDataAccessException ex){
+            throw new DataIntegrityException("Não foi possivel realizar a deleção pois a categoria não existe");
+        }
+    }
+
+    @Override
+    public ListaCategoriasDTO buscarTodasCategorias() {
+        return ListaCategoriasDTO.valueOf(categoriaRepository.findAll());
     }
 
     private void converterCategoria(CategoriaForm categoriaForm, Categoria categoria) {

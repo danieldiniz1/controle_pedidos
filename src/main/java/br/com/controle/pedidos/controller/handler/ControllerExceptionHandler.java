@@ -1,5 +1,6 @@
 package br.com.controle.pedidos.controller.handler;
 
+import br.com.controle.pedidos.exception.DataIntegrityException;
 import br.com.controle.pedidos.exception.ObjetoNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +15,11 @@ public class ControllerExceptionHandler {
     @ExceptionHandler(ObjetoNotFoundException.class)
     public ResponseEntity<StandardError> objectNotFound(ObjetoNotFoundException e, HttpServletRequest request) {
         StandardError err = new StandardError(HttpStatus.NOT_FOUND.value(),e.getMessage(),System.currentTimeMillis());
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(err);
+    }
+    @ExceptionHandler(DataIntegrityException.class)
+    public ResponseEntity<StandardError> dataIntegrity(DataIntegrityException e, HttpServletRequest request){
+        StandardError err = new StandardError(HttpStatus.NOT_FOUND.value(), e.getMessage(),System.currentTimeMillis());
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(err);
     }
 }
