@@ -2,6 +2,7 @@ package br.com.controle.pedidos.model;
 
 import br.com.controle.pedidos.model.enums.TipoCliente;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.springframework.util.Assert;
 
@@ -20,14 +21,13 @@ public class Cliente {
     private String cnpj;
     private Integer tipoCliente;
     @OneToMany(mappedBy = "cliente")
-    @JsonManagedReference
     private List<Endereco> enderecos = new ArrayList<>();
     @ElementCollection
     @CollectionTable(name = "Telefone")
     private Set<String> telefones = new HashSet<>();
 
     @OneToMany(mappedBy = "cliente")
-    @JsonBackReference
+    @JsonIgnore
     private List<Pedido> pedidos = new ArrayList<>();
 
     public Cliente() {

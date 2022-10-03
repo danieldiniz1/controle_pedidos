@@ -20,11 +20,10 @@ public class Endereco {
     private String cep;
     @ManyToOne
     @JoinColumn(name = "cliente_id")
-    @JsonBackReference
+    @JsonIgnore
     private Cliente cliente;
     @ManyToOne
     @JoinColumn(name = "cidade_id")
-//    @JsonBackReference
     private Cidade cidade;
 
     public Endereco() {

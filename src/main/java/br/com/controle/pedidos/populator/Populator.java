@@ -1,4 +1,4 @@
-package br.com.controle.pedidos.controller.populator;
+package br.com.controle.pedidos.populator;
 
 public interface Populator<SOURCE,TARGET> {
 

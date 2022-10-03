@@ -1,13 +1,16 @@
 package br.com.controle.pedidos.model;
 
 import br.com.controle.pedidos.model.enums.EstadoPagamento;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.persistence.Entity;
 import java.time.LocalDateTime;
 @Entity
 public class PagamentoComBoleto extends Pagamento{
 
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDateTime dataVencimento;
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDateTime dataPagamento;
 
     public PagamentoComBoleto() {
