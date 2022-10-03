@@ -1,16 +1,19 @@
 package br.com.controle.pedidos.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.util.Assert;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Entity(name = "produtos")
 public class Produto {
+
+    private static final Logger LOGGER = LogManager.getLogger();
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -20,12 +23,22 @@ public class Produto {
     @JsonIgnore
     private List<Categoria> categorias = new ArrayList<>();
 
+    @OneToMany(mappedBy = "id.produto")
+    private Set<ItemPedido> itens = new HashSet<>();
+
     public Produto() {
     }
 
     public Produto(String nome, BigDecimal preco) {
         this.nome = nome;
         this.preco = preco;
+    }
+
+    public List<Pedido> getPedidos(){
+        List<Pedido> listaPedidos = new ArrayList<>();
+        itens.stream().collect(Collectors.toList()).forEach((itemPedido -> listaPedidos.add(itemPedido.getPedido())));
+       listaPedidos.forEach((p) -> LOGGER.info(p.getCliente().getNome()));
+        return listaPedidos;
     }
 
     public Long getId() {
@@ -58,6 +71,14 @@ public class Produto {
 
     public void setCategorias(List<Categoria> categorias) {
         this.categorias = categorias;
+    }
+
+    public Set<ItemPedido> getItens() {
+        return itens;
+    }
+
+    public void setItens(Set<ItemPedido> itens) {
+        this.itens = itens;
     }
 
     @Override

@@ -18,6 +18,7 @@ import java.time.Month;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @SpringBootApplication
 public class PedidosApplication implements CommandLineRunner {
@@ -46,6 +47,8 @@ public class PedidosApplication implements CommandLineRunner {
 	@Autowired
 	private PagamentoService pagamentoService;
 
+	@Autowired
+	private ItemPedidoService itemPedidoService;
 
 	public static void main(String[] args) {
 		SpringApplication.run(PedidosApplication.class, args);
@@ -129,6 +132,17 @@ public class PedidosApplication implements CommandLineRunner {
 		pagamentoService.salvarPagamentos(Arrays.asList(pagamentoCartao,pagamentoComBoleto));
 		clienteService.atualizarCliente(maria);
 
+		ItemPedido itemPedido1 = ItemPedido.valueOf(pedidoPrimeiro,computador,null,1,null);
+		ItemPedido itemPedido2 = ItemPedido.valueOf(pedidoPrimeiro,mouse,null,2,null);
+		ItemPedido itemPedido3 = ItemPedido.valueOf(pedidoSegundo,mouse,BigDecimal.valueOf(100),1,BigDecimal.valueOf(800));
+
+		pedidoPrimeiro.setItens(Set.of(itemPedido1,itemPedido2));
+		pedidoSegundo.setItens(Set.of(itemPedido3));
+
+		computador.setItens(Set.of(itemPedido1));
+		mouse.setItens(Set.of(itemPedido2,itemPedido3));
+
+		itemPedidoService.cadastrarTodosItenPedido(Arrays.asList(itemPedido1,itemPedido2,itemPedido3));
 
 	}
 }
