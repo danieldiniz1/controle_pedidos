@@ -3,7 +3,7 @@ package br.com.controle.pedidos.service.impl;
 import br.com.controle.pedidos.controller.dto.ClienteResponseDTO;
 import br.com.controle.pedidos.exception.ObjetoNotFoundException;
 import br.com.controle.pedidos.model.Cliente;
-import br.com.controle.pedidos.populator.impl.ClienteResponsePopulator;
+import br.com.controle.pedidos.controller.populator.impl.ClienteResponsePopulator;
 import br.com.controle.pedidos.repository.ClienteRepository;
 import br.com.controle.pedidos.service.ClienteService;
 import org.apache.logging.log4j.LogManager;

@@ -1,8 +1,8 @@
-package br.com.controle.pedidos.populator.impl;
+package br.com.controle.pedidos.controller.populator.impl;
 
 import br.com.controle.pedidos.controller.dto.CategoriaResponseDTO;
 import br.com.controle.pedidos.model.Categoria;
-import br.com.controle.pedidos.populator.Populator;
+import br.com.controle.pedidos.controller.populator.Populator;
 import org.springframework.stereotype.Component;
 
 import java.util.Collections;

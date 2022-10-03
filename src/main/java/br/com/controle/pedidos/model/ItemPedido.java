@@ -38,7 +38,7 @@ public class ItemPedido {
         return id.getPedido();
     }
 
-    @JsonIgnore
+
     public Produto getProduto(){
         return id.getProduto();
     }
