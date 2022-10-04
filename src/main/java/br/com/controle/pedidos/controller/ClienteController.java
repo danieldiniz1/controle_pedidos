@@ -43,4 +43,10 @@ public class ClienteController {
         clienteService.atualizarCliente(form,id);
         return ResponseEntity.noContent().build();
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity excluirClientePorId(@PathVariable Long id){
+        clienteService.excluirClientePorId(id);
+        return ResponseEntity.noContent().build();
+    }
 }

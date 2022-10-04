@@ -19,4 +19,6 @@ public interface ClienteService {
     void atualizarCliente(ClienteForm clienteForm, Long id);
 
     Page<ClienteResponseDTO> buscarTodosClientes(Integer page, Integer linesPerPage, String orderBy, String direction);
+
+    void excluirClientePorId(Long id);
 }

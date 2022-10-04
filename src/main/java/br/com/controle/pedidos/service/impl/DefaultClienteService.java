@@ -2,6 +2,8 @@ package br.com.controle.pedidos.service.impl;
 
 import br.com.controle.pedidos.controller.dto.ClienteResponseDTO;
 import br.com.controle.pedidos.controller.form.ClienteForm;
+import br.com.controle.pedidos.exception.DataIntegrityException;
+import br.com.controle.pedidos.exception.DataViolationException;
 import br.com.controle.pedidos.exception.ObjetoNotFoundException;
 import br.com.controle.pedidos.model.Cliente;
 import br.com.controle.pedidos.populator.Populator;
@@ -10,7 +12,9 @@ import br.com.controle.pedidos.repository.ClienteRepository;
 import br.com.controle.pedidos.service.ClienteService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -66,6 +70,15 @@ public class DefaultClienteService implements ClienteService {
         Page<Cliente> allClientes = clienteRepository.findAll(PageRequest.of(page, linesPerPage, Sort.Direction.valueOf(direction), orderBy));
         Page<ClienteResponseDTO> response = allClientes.map((c) -> ClienteResponseDTO.ValueOf(c));
         return response;
+    }
+
+    @Override
+    public void excluirClientePorId(Long id) {
+        try {
+            clienteRepository.deleteById(id);
+        } catch (DataIntegrityViolationException e){
+            throw new DataViolationException("Não é possivel deletar o cliente porque existem associações para ele");
+        }
     }
 
     private Cliente converterToCLienteFromForm(ClienteForm clienteForm, Cliente cliente) {
