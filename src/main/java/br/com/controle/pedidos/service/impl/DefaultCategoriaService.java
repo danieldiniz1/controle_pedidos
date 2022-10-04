@@ -50,7 +50,7 @@ public class DefaultCategoriaService implements CategoriaService {
     public Categoria salvarCategoria(CategoriaForm categoriaForm) {
         Categoria categoria = Categoria.categoriaBlank();
         categoriaForm.setId(null);
-        converterCategoria(categoriaForm, categoria);
+        converterCategoriaFromDTO(categoriaForm, categoria);
         return categoriaRepository.save(categoria);
 
     }
@@ -60,7 +60,7 @@ public class DefaultCategoriaService implements CategoriaService {
         Categoria categoria = categoriaRepository.findById(id).orElseThrow(() -> new ObjetoNotFoundException("" +
                 "Não foi encontrado uma categoria com o id " + id.toString()));
         categoriaForm.setId(id);
-        converterCategoria(categoriaForm,categoria);
+        converterCategoriaFromDTO(categoriaForm,categoria);
         categoriaRepository.save(categoria);
     }
 
@@ -83,7 +83,7 @@ public class DefaultCategoriaService implements CategoriaService {
         return categoriaRepository.findAll(PageRequest.of(page,linesPerPage, Sort.Direction.valueOf(direction),orderBy));
     }
 
-    private void converterCategoria(CategoriaForm categoriaForm, Categoria categoria) {
+    private void converterCategoriaFromDTO(CategoriaForm categoriaForm, Categoria categoria) {
         categoriaPopulator.populate(categoriaForm, categoria);
     }
 
