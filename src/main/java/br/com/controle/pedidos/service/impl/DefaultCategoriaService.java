@@ -13,6 +13,9 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -73,6 +76,11 @@ public class DefaultCategoriaService implements CategoriaService {
     @Override
     public MapaCategoriasDTO buscarTodasCategorias() {
         return MapaCategoriasDTO.valueOf(categoriaRepository.findAll());
+    }
+
+    @Override
+    public Page<Categoria> bucarPagina(Integer page, Integer linesPerPage, String orderBy, String direction) {
+        return categoriaRepository.findAll(PageRequest.of(page,linesPerPage, Sort.Direction.valueOf(direction),orderBy));
     }
 
     private void converterCategoria(CategoriaForm categoriaForm, Categoria categoria) {

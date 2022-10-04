@@ -60,6 +60,11 @@ public class PedidosApplication implements CommandLineRunner {
         LOGGER.info("hashcode informatica: " + informatica.hashCode());
         Categoria escritorio = Categoria.valueOf(null, "Escritório");
         LOGGER.info("hashcode categoria: " + informatica.hashCode());
+		Categoria cama = Categoria.valueOf(null, "Cama, Mesa e Banho");
+		Categoria eletronico = Categoria.valueOf(null, "Eletrônicos");
+		Categoria jardinagem = Categoria.valueOf(null, "Jarginagem");
+		Categoria decoracao = Categoria.valueOf(null, "Decoração");
+		Categoria perfumaria = Categoria.valueOf(null, "Perfumaria");
 
 		Produto computador = Produto.novoProduto("Computador", BigDecimal.valueOf(2000.50), Arrays.asList(informatica));
 		Produto impressora = Produto.novoProduto("Impressora", BigDecimal.valueOf(800.67), Arrays.asList(escritorio,informatica));
@@ -69,7 +74,7 @@ public class PedidosApplication implements CommandLineRunner {
 		escritorio.setProdutos(Arrays.asList(mouse));
 
 		produtoService.salvarListaProdutos(Arrays.asList(computador,impressora,mouse));
-		categoriaService.salvarListaCategorias(Arrays.asList(informatica,escritorio));
+		categoriaService.salvarListaCategorias(Arrays.asList(informatica,escritorio,cama,eletronico,jardinagem,decoracao,perfumaria));
 
 		Estado sp = Estado.valueOf("SP");
 		Estado mg = Estado.valueOf("MG");
