@@ -1,8 +1,10 @@
 package br.com.controle.pedidos.service.impl;
 
 import br.com.controle.pedidos.controller.dto.ClienteResponseDTO;
+import br.com.controle.pedidos.controller.form.ClienteForm;
 import br.com.controle.pedidos.exception.ObjetoNotFoundException;
 import br.com.controle.pedidos.model.Cliente;
+import br.com.controle.pedidos.populator.Populator;
 import br.com.controle.pedidos.populator.impl.ClienteResponsePopulator;
 import br.com.controle.pedidos.repository.ClienteRepository;
 import br.com.controle.pedidos.service.ClienteService;
@@ -24,6 +26,9 @@ public class DefaultClienteService implements ClienteService {
     @Autowired
     private ClienteResponsePopulator clienteResponsePopulator;
 
+    @Autowired
+    private Populator<ClienteForm,Cliente> clientePopulator;
+
     @Override
     public void cadastrarCliente(Cliente cliente) {
         LOGGER.info("iniciando o cadastro do cliente com nome: " + cliente.getNome());
@@ -44,6 +49,18 @@ public class DefaultClienteService implements ClienteService {
     @Override
     public void atualizarCliente(Cliente cliente) {
         clienteRepository.save(cliente);
+    }
+
+    @Override
+    public void atualizarCliente(ClienteForm clienteForm, Long id) {
+        atualizarCliente(converterToCLienteFromForm(
+                clienteForm,
+                clienteRepository.findById(id).orElseThrow(() -> new ObjetoNotFoundException("não foi encontrado cliente com id: " + id))));
+    }
+
+    private Cliente converterToCLienteFromForm(ClienteForm clienteForm, Cliente cliente) {
+        clientePopulator.populate(clienteForm,cliente);
+        return cliente;
     }
 
     private ClienteResponseDTO converterToClienteResponseDTO(Cliente cliente, ClienteResponseDTO clienteResponseDTO) {
