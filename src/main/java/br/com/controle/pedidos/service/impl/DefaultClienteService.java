@@ -11,6 +11,9 @@ import br.com.controle.pedidos.service.ClienteService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -56,6 +59,13 @@ public class DefaultClienteService implements ClienteService {
         atualizarCliente(converterToCLienteFromForm(
                 clienteForm,
                 clienteRepository.findById(id).orElseThrow(() -> new ObjetoNotFoundException("não foi encontrado cliente com id: " + id))));
+    }
+
+    @Override
+    public Page<ClienteResponseDTO> buscarTodosClientes(Integer page, Integer linesPerPage, String orderBy, String direction) {
+        Page<Cliente> allClientes = clienteRepository.findAll(PageRequest.of(page, linesPerPage, Sort.Direction.valueOf(direction), orderBy));
+        Page<ClienteResponseDTO> response = allClientes.map((c) -> ClienteResponseDTO.ValueOf(c));
+        return response;
     }
 
     private Cliente converterToCLienteFromForm(ClienteForm clienteForm, Cliente cliente) {

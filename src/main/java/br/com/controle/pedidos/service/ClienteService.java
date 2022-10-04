@@ -3,6 +3,7 @@ package br.com.controle.pedidos.service;
 import br.com.controle.pedidos.controller.dto.ClienteResponseDTO;
 import br.com.controle.pedidos.controller.form.ClienteForm;
 import br.com.controle.pedidos.model.Cliente;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 
@@ -16,4 +17,6 @@ public interface ClienteService {
     void atualizarCliente(Cliente cliente);
 
     void atualizarCliente(ClienteForm clienteForm, Long id);
+
+    Page<ClienteResponseDTO> buscarTodosClientes(Integer page, Integer linesPerPage, String orderBy, String direction);
 }
