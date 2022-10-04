@@ -1,23 +1,19 @@
 package br.com.controle.pedidos.controller;
 
 import br.com.controle.pedidos.controller.dto.CategoriaResponseDTO;
-import br.com.controle.pedidos.controller.dto.ListaCategoriasDTO;
+import br.com.controle.pedidos.controller.dto.MapaCategoriasDTO;
 import br.com.controle.pedidos.controller.form.CategoriaForm;
 import br.com.controle.pedidos.model.Categoria;
 import br.com.controle.pedidos.service.CategoriaService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 @RestController
 @RequestMapping("/categorias")
@@ -29,7 +25,7 @@ public class CategoriaController {
     private CategoriaService categoriaService;
 
     @GetMapping()
-    public ResponseEntity<ListaCategoriasDTO> buscarTodasCategorias(){
+    public ResponseEntity<MapaCategoriasDTO> buscarTodasCategorias(){
         return ResponseEntity.status(200).body(categoriaService.buscarTodasCategorias());
     }
 

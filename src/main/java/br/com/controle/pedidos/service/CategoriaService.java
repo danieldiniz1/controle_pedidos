@@ -1,10 +1,9 @@
 package br.com.controle.pedidos.service;
 
 import br.com.controle.pedidos.controller.dto.CategoriaResponseDTO;
-import br.com.controle.pedidos.controller.dto.ListaCategoriasDTO;
+import br.com.controle.pedidos.controller.dto.MapaCategoriasDTO;
 import br.com.controle.pedidos.controller.form.CategoriaForm;
 import br.com.controle.pedidos.model.Categoria;
-import br.com.controle.pedidos.model.Produto;
 
 import java.util.List;
 
@@ -20,5 +19,5 @@ public interface CategoriaService {
 
     void deletarCategoria(Long id);
 
-    ListaCategoriasDTO buscarTodasCategorias();
+    MapaCategoriasDTO buscarTodasCategorias();
 }

@@ -6,14 +6,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ListaCategoriasDTO {
+public class MapaCategoriasDTO {
 
     private Map<String,String> categorias;
 
-    public ListaCategoriasDTO() {
+    public MapaCategoriasDTO() {
     }
 
-    public ListaCategoriasDTO(HashMap<String, String> categorias) {
+    public MapaCategoriasDTO(HashMap<String, String> categorias) {
         this.categorias = categorias;
     }
 
@@ -25,9 +25,9 @@ public class ListaCategoriasDTO {
         this.categorias = categorias;
     }
 
-    public static ListaCategoriasDTO valueOf(List<Categoria> categorias){
+    public static MapaCategoriasDTO valueOf(List<Categoria> categorias){
         HashMap<String,String> categoriaMap = new HashMap<>();
         categorias.forEach(categoria -> categoriaMap.put(categoria.getId().toString(),categoria.getNome()));
-        return new ListaCategoriasDTO(categoriaMap);
+        return new MapaCategoriasDTO(categoriaMap);
     }
 }

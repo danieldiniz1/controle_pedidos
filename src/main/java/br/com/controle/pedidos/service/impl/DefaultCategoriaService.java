@@ -1,7 +1,7 @@
 package br.com.controle.pedidos.service.impl;
 
 import br.com.controle.pedidos.controller.dto.CategoriaResponseDTO;
-import br.com.controle.pedidos.controller.dto.ListaCategoriasDTO;
+import br.com.controle.pedidos.controller.dto.MapaCategoriasDTO;
 import br.com.controle.pedidos.controller.form.CategoriaForm;
 import br.com.controle.pedidos.exception.DataIntegrityException;
 import br.com.controle.pedidos.exception.ObjetoNotFoundException;
@@ -71,8 +71,8 @@ public class DefaultCategoriaService implements CategoriaService {
     }
 
     @Override
-    public ListaCategoriasDTO buscarTodasCategorias() {
-        return ListaCategoriasDTO.valueOf(categoriaRepository.findAll());
+    public MapaCategoriasDTO buscarTodasCategorias() {
+        return MapaCategoriasDTO.valueOf(categoriaRepository.findAll());
     }
 
     private void converterCategoria(CategoriaForm categoriaForm, Categoria categoria) {
