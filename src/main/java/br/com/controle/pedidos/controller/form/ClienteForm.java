@@ -4,6 +4,7 @@ import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 
 public class ClienteForm {
 
@@ -11,7 +12,8 @@ public class ClienteForm {
     @NotBlank(message = "nome não pode estar vazio")
     @Length(min = 3, max = 255, message = "nome esta fora do padrão")
     private String nome;
-    @Email
+    @NotEmpty(message = "email não pode ser vazio")
+    @Email(message = "email inválido")
     private String email;
 
     public ClienteForm() {
