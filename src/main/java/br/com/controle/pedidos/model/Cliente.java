@@ -142,6 +142,10 @@ public class Cliente {
         return new Cliente(nome,email,tipoCliente,cnpj);
     }
 
+    public static Cliente clienteEmpty(){
+        return new Cliente();
+    }
+
     private static void validation(String nome, String email, String cpf, String cnpj, TipoCliente tipoCliente) {
         Assert.notNull(nome, "O nome não pode ser nulo");
         Assert.notNull(email, "O email não pode ser nulo");

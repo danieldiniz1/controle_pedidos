@@ -5,7 +5,7 @@ import java.util.Arrays;
 public enum TipoCliente {
 
     PESSOAFISICA(1,"Pessoa Fisica"),
-    PESSOAJURIDICA(1,"Pessoa Juridica");
+    PESSOAJURIDICA(2,"Pessoa Juridica");
 
     private Integer codigo;
     private String descricao;

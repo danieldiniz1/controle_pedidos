@@ -2,15 +2,19 @@ package br.com.controle.pedidos.controller;
 
 import br.com.controle.pedidos.controller.dto.ClienteResponseDTO;
 import br.com.controle.pedidos.controller.form.ClienteForm;
+import br.com.controle.pedidos.model.Cliente;
 import br.com.controle.pedidos.service.ClienteService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
+import java.net.URI;
 
 @RestController
 @RequestMapping("/clientes")
@@ -48,5 +52,12 @@ public class ClienteController {
     public ResponseEntity excluirClientePorId(@PathVariable Long id){
         clienteService.excluirClientePorId(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @PostMapping
+    public ResponseEntity adicionarNovoCliente(@Valid @RequestBody ClienteForm clienteForm){
+        Cliente cliente = clienteService.cadastrarCliente(clienteForm);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(cliente.getId().toString()).toUri();
+        return ResponseEntity.created(uri).build();
     }
 }

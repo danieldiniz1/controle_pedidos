@@ -10,6 +10,8 @@ import java.util.List;
 public interface ClienteService {
     void cadastrarCliente(Cliente cliente);
 
+    Cliente cadastrarCliente(ClienteForm clienteForm);
+
     void cadastrarClientes(List<Cliente> clientes);
 
     ClienteResponseDTO buscarClientePorId(Long id);
