@@ -3,6 +3,7 @@ package br.com.controle.pedidos.controller.handler;
 import br.com.controle.pedidos.exception.DataIntegrityException;
 import br.com.controle.pedidos.exception.DataViolationException;
 import br.com.controle.pedidos.exception.ObjetoNotFoundException;
+import org.springframework.beans.NotReadablePropertyException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -25,6 +26,11 @@ public class ControllerExceptionHandler {
     }
     @ExceptionHandler(DataViolationException.class)
     public ResponseEntity<StandardError> dataViolation(DataViolationException e, HttpServletRequest request){
+        StandardError err =new StandardError(HttpStatus.NOT_ACCEPTABLE.value(), e.getMessage(),System.currentTimeMillis());
+        return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(err);
+    }
+    @ExceptionHandler(NotReadablePropertyException.class)
+    public ResponseEntity<StandardError> parameterInvalid(NotReadablePropertyException e, HttpServletRequest request){
         StandardError err =new StandardError(HttpStatus.NOT_ACCEPTABLE.value(), e.getMessage(),System.currentTimeMillis());
         return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(err);
     }

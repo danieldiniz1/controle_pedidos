@@ -1,5 +1,6 @@
 package br.com.controle.pedidos.controller.form;
 
+import br.com.controle.pedidos.service.validation.ClienteInsert;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.Email;
@@ -7,6 +8,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
+@ClienteInsert
 public class ClienteForm {
 
     private Long id;
@@ -20,10 +22,14 @@ public class ClienteForm {
     private String cpf;
     private String cnpj;
     private Integer tipoCliente;
+    @NotEmpty
     private String logradouro;
+    @NotEmpty
     private String numero;
     private String complemento;
+    @NotEmpty
     private String bairro;
+    @NotEmpty
     private String cep;
     private String telefone;
     private String telefone2;
