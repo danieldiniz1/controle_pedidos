@@ -20,7 +20,7 @@ public class Cliente {
     private String cpf;
     private String cnpj;
     private Integer tipoCliente;
-    @OneToMany(mappedBy = "cliente")
+    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
     private List<Endereco> enderecos = new ArrayList<>();
     @ElementCollection
     @CollectionTable(name = "Telefone")

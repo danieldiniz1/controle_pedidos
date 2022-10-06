@@ -22,6 +22,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Arrays;
 import java.util.List;
@@ -52,6 +53,7 @@ public class DefaultClienteService implements ClienteService {
         clienteRepository.save(cliente);
     }
 
+    @Transactional
     @Override
     public Cliente cadastrarCliente(ClienteForm clienteForm) {
         //verificar se o cliente já não está cadastrado
