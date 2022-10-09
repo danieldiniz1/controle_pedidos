@@ -69,11 +69,15 @@ public class PedidosApplication implements CommandLineRunner {
 		Produto computador = Produto.novoProduto("Computador", BigDecimal.valueOf(2000.50), Arrays.asList(informatica));
 		Produto impressora = Produto.novoProduto("Impressora", BigDecimal.valueOf(800.67), Arrays.asList(escritorio,informatica));
 		Produto mouse = Produto.novoProduto("Mouse", BigDecimal.valueOf(100.20), Arrays.asList(informatica));
+		Produto mesa = Produto.novoProduto("Mesa", BigDecimal.valueOf(300), Arrays.asList(informatica));
+		Produto toalha = Produto.novoProduto("toalha", BigDecimal.valueOf(300), Arrays.asList(cama));
+		Produto tv = Produto.novoProduto("TV", BigDecimal.valueOf(300), Arrays.asList(eletronico,informatica));
 
-		informatica.setProdutos(Arrays.asList(computador,impressora,mouse));
+		informatica.setProdutos(Arrays.asList(computador,impressora,mouse,mesa,tv));
 		escritorio.setProdutos(Arrays.asList(mouse));
+		cama.setProdutos(Arrays.asList(toalha));
 
-		produtoService.salvarListaProdutos(Arrays.asList(computador,impressora,mouse));
+		produtoService.salvarListaProdutos(Arrays.asList(computador,impressora,mouse,mesa,toalha,tv));
 		categoriaService.salvarListaCategorias(Arrays.asList(informatica,escritorio,cama,eletronico,jardinagem,decoracao,perfumaria));
 
 		Estado sp = Estado.valueOf("SP");
