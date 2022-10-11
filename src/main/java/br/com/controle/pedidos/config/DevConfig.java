@@ -9,18 +9,17 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
 @Configuration
-@Profile("teste")
-public class TesteConfig {
+@Profile("dev")
+public class DevConfig {
 
     private static final Logger LOGGER = LogManager.getLogger();
-
     @Autowired
     private DataBaseService dataBaseService;
 
     @Bean
     public Boolean instantiateDataBase(){
-        dataBaseService.instantiateTestDataBase();
-        LOGGER.info("O Banco de dados foi populado com sucesso!");
+//        dataBaseService.instantiateTestDataBase();
+//        LOGGER.info("O Banco de dados foi populado com sucesso!");
         return Boolean.TRUE;
     }
 }
