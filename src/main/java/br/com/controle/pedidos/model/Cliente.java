@@ -16,11 +16,12 @@ public class Cliente {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
+    @Column(unique = true)
     private String email;
     private String cpf;
     private String cnpj;
     private Integer tipoCliente;
-    @OneToMany(mappedBy = "cliente")
+    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
     private List<Endereco> enderecos = new ArrayList<>();
     @ElementCollection
     @CollectionTable(name = "Telefone")
@@ -140,6 +141,10 @@ public class Cliente {
             return new Cliente(nome,email,cpf,tipoCliente);
         }
         return new Cliente(nome,email,tipoCliente,cnpj);
+    }
+
+    public static Cliente clienteEmpty(){
+        return new Cliente();
     }
 
     private static void validation(String nome, String email, String cpf, String cnpj, TipoCliente tipoCliente) {

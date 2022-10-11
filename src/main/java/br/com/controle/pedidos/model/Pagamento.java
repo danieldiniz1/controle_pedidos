@@ -24,7 +24,7 @@ public abstract class Pagamento {
     }
 
     public Pagamento(EstadoPagamento estadoPagamento, Pedido pedido) {
-        this.estadoPagamento = estadoPagamento.getCodigo();
+        this.estadoPagamento = estadoPagamento == null ? null : estadoPagamento.getCodigo();
         this.pedido = pedido;
     }
 

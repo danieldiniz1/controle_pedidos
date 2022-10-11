@@ -1,5 +1,6 @@
 package br.com.controle.pedidos.service.impl;
 
+import br.com.controle.pedidos.exception.ObjetoNotFoundException;
 import br.com.controle.pedidos.model.Cidade;
 import br.com.controle.pedidos.repository.CidadeRepository;
 import br.com.controle.pedidos.service.CidadeService;
@@ -20,5 +21,11 @@ public class DefaultCidadeService implements CidadeService {
     @Override
     public void salvarCidades(List<Cidade> cidades) {
         cidadeRepository.saveAll(cidades);
+    }
+
+    @Override
+    public Cidade buscarCidadePorId(Integer cidadeId) {
+        return cidadeRepository.findById(cidadeId.longValue()).orElseThrow(() -> new ObjetoNotFoundException("" +
+                "não foi encontrado cidade com o id: " + cidadeId));
     }
 }

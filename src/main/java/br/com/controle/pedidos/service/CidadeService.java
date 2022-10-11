@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface CidadeService {
     void salvarCidades(List<Cidade> cidades);
+
+    Cidade buscarCidadePorId(Integer cidadeId);
 }

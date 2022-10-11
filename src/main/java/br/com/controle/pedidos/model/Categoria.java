@@ -29,6 +29,9 @@ public class Categoria {
     public static Categoria valueOf(Long id,String nome){
         return new Categoria(id,nome);
     }
+    public static Categoria categoriaBlank(){
+        return new Categoria();
+    }
 
     public Long getId() {
         return id;
