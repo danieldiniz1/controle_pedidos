@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
 @Configuration
-@Profile("teste")
+@Profile("test")
 public class TesteConfig {
 
     private static final Logger LOGGER = LogManager.getLogger();
